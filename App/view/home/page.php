@@ -1,19 +1,25 @@
+<div class="container mb-5">
+<div class="row pb-3 m-2 my-4 border-bottom">
+<h4 class="p-0">
+Tutorial <?= $data['title'] ;?>
+</h4>
+<small class="p-0">
+Javascript adalah bahasa pemrograman untuk front end development, berikut adalah tutorialnya untuk dipelajari
+</small>
+</div>
 
-
-<div class="row m-3 mt-5 mb-5">
-<h3 class="p-0">Tutorial <?= $data['title'] ;?> </h3>
 <?php 
 foreach($data['tutorial'] as $d) : ?>
 
-<a href="/?url=home/post/<?= str_replace(' ', '-', trim($d['judul'])) ;?>" class="text-decoration-none">
-<div class="bg-light border mb-1 p-2"><b>
-<small><?= $d['judul'] ;?></small></b>
+<div class="row p-2 m-2 bg-light">
+<a href="/?url=home/post/<?= str_replace(' ', '-', trim($d['judul'])) ;?>" class="p-0 text-decoration-none link">
+<b class="p-0">
+<?= $d['judul'] ;?> 
+</b></a>
 </div>
-</a>
 <?php endforeach ;?>
-</div>
-<center>
 
+</div>
 
 
 
