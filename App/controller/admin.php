@@ -34,7 +34,8 @@ class Admin extends Controller{
 		$data['artikel'] = $this->model('Admin_model')->getArtikel($link);
 		$data['video'] = $this->model('Admin_model')->getVideo($link);
 		$data['contoh'] = $this->model('Admin_model')->getContoh($link);
-		$this->view('template/header');
+		$data['title'] = $link;
+                $this->view('template/header');
 		$this->view('admin/post', $data);
 		$this->view('template/footer');
 	}
