@@ -35,11 +35,19 @@ class Admin_model{
 	
 	public function getTutorial(){
 	
-		$query = "SELECT DISTINCT judul, kategori FROM data_tutorial";
+		$query = "SELECT DISTINCT kategori FROM data_tutorial";
 		$this->db->query($query);
 		return $this->db->ambilData();
 	}
 	
+	public function getPage($nama){
+	
+		$query = "SELECT DISTINCT judul FROM data_tutorial WHERE kategori=:kategori and status=:status";
+		$this->db->query($query);
+		$this->db->bind('kategori', $nama);
+		$this->db->bind('status', 'publik');
+		return $this->db->ambilData();
+	}
 	
 	public function getContoh($nama){
 	
