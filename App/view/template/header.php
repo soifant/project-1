@@ -37,14 +37,21 @@
     margin:5px;
     margin-bottom:20px;
     }
+    
+    .link{
+    color:#333;
+    }
+    .link:hover {
+    color:blue;
+    }
     </style>
     <title>Hello, world!</title>
   </head>
   <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm border-bottom">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"><b>KursusWEB</b></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/"><b>Gocode.pw</b></a>
+    <button class="navbar-toggler border-0 shadow-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
