@@ -9,6 +9,13 @@ class Admin extends Controller{
 		$this->view('template/footer');
 	}
 	
+	public function page($nama){
+		$data['tutorial'] = $this->model('Admin_model')->getPage($nama);
+		$this->view('template/header');
+		$this->view('admin/page', $data);
+		$this->view('template/footer');
+	}
+	
 	public function tambahPost(){
 		$this->view('template/header');
 		$this->view('admin/tambah-post', $data);
@@ -19,7 +26,7 @@ class Admin extends Controller{
 		if($this->model('Admin_model')->getTambah($_POST) > 0){
 			header('location:/?url=home/post/'.str_replace(' ', '-', trim($_POST['judul'].'')));
 		}else{
-			echo 'salah '.var_dump($_POST);
+			echo 'Kesalahan '.var_dump($_POST);
 		}
 	}
 	
