@@ -11,12 +11,14 @@ class Admin extends Controller{
 	
 	public function page($nama){
 		$data['tutorial'] = $this->model('Admin_model')->getPage($nama);
+		$data['title'] = $nama;
 		$this->view('template/header');
 		$this->view('admin/page', $data);
 		$this->view('template/footer');
 	}
 	
-	public function tambahPost(){
+	public function tambahData($nama){
+		$data['page'] = $nama;
 		$this->view('template/header');
 		$this->view('admin/tambah-post', $data);
 		$this->view('template/footer');
@@ -35,7 +37,7 @@ class Admin extends Controller{
 		$data['video'] = $this->model('Admin_model')->getVideo($link);
 		$data['contoh'] = $this->model('Admin_model')->getContoh($link);
 		$data['title'] = $link;
-                $this->view('template/header');
+		$this->view('template/header');
 		$this->view('admin/post', $data);
 		$this->view('template/footer');
 	}
