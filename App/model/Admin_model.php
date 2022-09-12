@@ -8,74 +8,104 @@ class Admin_model{
 	
 	}
 	
-	public function getTambah($data){
+	public function tambahKategori($data){
 	
-		$query = "INSERT INTO data_tutorial SET 
-
-				judul=:judul,
-				kategori=:kategori,
-				tutorial=:tutorial,
-				sub_judul=:sub,
-				link=:link,
-				status=:status,
-				dari=:dari
-				";
 		
-		$this->db->query($query);
-		$this->db->bind('judul', $data['judul']);
-		$this->db->bind('sub', $data['sub_judul']);
-		$this->db->bind('link', $data['link']);
-		$this->db->bind('status', 'publik');
-		$this->db->bind('dari', $data['dari']);
-		$this->db->bind('kategori', $data['kategori']);
-		$this->db->bind('tutorial', $data['tutorial']);
-		$this->db->eksekusi();
-		return $this->db->rowCount();
+			$query = "INSERT INTO data_kategori SET nama=:nama";
+			$this->db->query($query);
+			$this->db->bind('nama', $data['nama']);
+			$this->db->eksekusi();
+			return $this->db->rowCount();
 	}
-	
-	public function getTutorial(){
-	
-		$query = "SELECT DISTINCT kategori FROM data_tutorial";
-		$this->db->query($query);
-		return $this->db->ambilData();
+		
+	public function tambahTutorial($data){
+			$query = "INSERT INTO data_tutorial SET judul=:judul, kategori=:kategori";
+			$this->db->query($query);
+			$this->db->bind('judul', $data['judul']);
+			$this->db->bind('kategori', $data['kategori']);
+			$this->db->eksekusi();
+			return $this->db->rowCount();
 	}
+		
+	public function tambahPost($data){
+			$query = "INSERT INTO data_post SET judul=:judul, link=:link, dari=:dari, type=:type, tutorial=:tutorial, kategori=:kategori";
+			$this->db->query($query);
+			$this->db->bind('judul', $data['judul']);
+			$this->db->bind('link', $data['link']);
+			$this->db->bind('dari', $data['dari']);
+			$this->db->bind('type', $data['type']);
+			$this->db->bind('tutorial', $data['tutorial']);
+			$this->db->bind('kategori', $data['kategori']);
+			$this->db->eksekusi();
+			return $this->db->rowCount();
+		
+		
+	}
+		
+		
 	
-	public function getPage($nama){
-	
-		$query = "SELECT DISTINCT judul FROM data_tutorial WHERE kategori=:kategori and status=:status";
+	public function totalArtikel($nama){
+		$query = "SELECT COUNT(*) FROM data_post WHERE kategori=:kategori and type=:type";
 		$this->db->query($query);
 		$this->db->bind('kategori', $nama);
-		$this->db->bind('status', 'publik');
+		$this->db->bind('type', 'artikel');
 		return $this->db->ambilData();
+	
 	}
 	
-	public function getContoh($nama){
 	
-		$query = "SELECT * FROM data_tutorial WHERE judul=:j and tutorial=:t";
+	public function totalVideo($nama){
+	$query = "SELECT COUNT(*) FROM data_post WHERE kategori=:kategori and type=:type";
+	$this->db->query($query);
+	$this->db->bind('kategori', $nama);
+	$this->db->bind('type', 'video');
+	return $this->db->ambilData();
+	
+	
+	}
+	
+	public function totalContoh($nama){
+	$query = "SELECT COUNT(*) FROM data_post WHERE kategori=:kategori and type=:type";
+	$this->db->query($query);
+	$this->db->bind('kategori', $nama);
+	$this->db->bind('type', 'contoh');
+	return $this->db->ambilData();
+	
+	
+	
+	}
+	
+	public function getPost($nama){
+	
+		$query = "SELECT * FROM data_post WHERE tutorial=:tutorial";
 		$this->db->query($query);
-		$this->db->bind('j', str_replace('-', ' ', $nama));
-		$this->db->bind('t', 'contoh');
+		$this->db->bind('tutorial', str_replace('-', ' ', $nama));
 		return $this->db->ambilData();
 	}
 	
-	
-	public function getVideo($nama){
-	
-		$query = "SELECT * FROM data_tutorial WHERE judul=:j and tutorial=:t";
+	public function getTutorial($nama){
+		$query = "SELECT judul FROM data_tutorial WHERE kategori=:kategori";
 		$this->db->query($query);
-		$this->db->bind('j', str_replace('-', ' ', $nama));
-		$this->db->bind('t', 'video');
+		$this->db->bind('kategori', $nama);
 		return $this->db->ambilData();
 	}
 	
-	public function getArtikel($nama){
+	public function getAllTutorial(){
 	
-		$query = "SELECT * FROM data_tutorial WHERE judul=:j and tutorial=:t";
+	$query = "SELECT * FROM data_tutorial";
+	$this->db->query($query);
+	return $this->db->ambilData();
+	}
+	
+	public function getKategori(){
+	
+		$query = "SELECT * FROM data_kategori";
 		$this->db->query($query);
-		$this->db->bind('j', str_replace('-', ' ', $nama));
-		$this->db->bind('t', 'artikel');
 		return $this->db->ambilData();
 	}
+	
+	
+	
 	
 	public function getHapus($id){
 		$query = "DELETE FROM data_tutorial WHERE id=:id";
