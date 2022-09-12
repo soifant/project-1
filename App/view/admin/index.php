@@ -1,4 +1,6 @@
 <div class="container">
+
+
 <div class="dropdown">
   <center>
   <a class="text-decoration-none link card bg-light mt-4 p-2" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,16 +28,31 @@
     
     <?php 
     $x=1;
-    foreach($data['tutorial'] as $h) : ?>
+    foreach($data['kategori'] as $h) : ?>
     <tr>
     <th scope="row"><?= $x++ ;?></th>
-      <td><a class="text-decoration-none link" href="/?url=admin/page/<?= $h['kategori'];?>">
-      <?= $h['kategori'] ;?>
+      <td><a class="text-decoration-none link" href="/?url=admin/page/<?= $h['nama'];?>">
+      <?= $h['nama'] ;?>
       </a></td>
-      <td>Null</td>
-      <td>Null</td>
-      <td>Null</td>
-      </tr>
+      <td><?php 
+      $artikel = 'artikel'.$h['nama'].'';
+	      foreach($data[$artikel][0] as $dt){
+		  echo $dt[0];
+      }?></td>
+       
+       <td><?php 
+       $video = 'video'.$h['nama'].'';
+	       foreach($data[$video][0] as $dt){
+	       echo $dt[0];
+       }?></td>
+       
+       <td><?php 
+       $contoh = 'contoh'.$h['nama'].'';
+	       foreach($data[$contoh][0] as $dt){
+	       echo $dt[0];
+       }?></td>
+         
+         </tr>
       <?php endforeach ;?>
      
   </tbody>
