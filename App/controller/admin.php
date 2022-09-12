@@ -3,14 +3,22 @@
 
 class Admin extends Controller{
 	public function index(){
-		$data['tutorial'] = $this->model('Admin_model')->getTutorial();
+		$data['kategori'] = $this->model('Admin_model')->getKategori();
+	
+		foreach($data['kategori'] as $d){
+			$data['artikel'.$d['nama'].''] = $this->model('Admin_model')->totalArtikel($d['nama']);
+			$data['video'.$d['nama'].''] = $this->model('Admin_model')->totalVideo($d['nama']);
+			$data['contoh'.$d['nama'].''] = $this->model('Admin_model')->totalContoh($d['nama']);
+		
+		}
+		
 		$this->view('template/header');
 		$this->view('admin/index', $data);
 		$this->view('template/footer');
 	}
 	
 	public function page($nama){
-		$data['tutorial'] = $this->model('Admin_model')->getPage($nama);
+		$data['tutorial'] = $this->model('Admin_model')->getTutorial($nama);
 		$data['title'] = $nama;
 		$this->view('template/header');
 		$this->view('admin/page', $data);
@@ -18,24 +26,44 @@ class Admin extends Controller{
 	}
 	
 	public function tambahData($nama){
+		$data['kategori'] = $this->model('Admin_model')->getKategori();
+		$data['tutorial'] = $this->model('Admin_model')->getAllTutorial();
 		$data['page'] = $nama;
 		$this->view('template/header');
 		$this->view('admin/tambah-post', $data);
 		$this->view('template/footer');
 	}
 	
-	public function tambah(){
-		if($this->model('Admin_model')->getTambah($_POST) > 0){
-			header('location:/?url=home/post/'.str_replace(' ', '-', trim($_POST['judul'].'')));
-		}else{
+	public function tambah($nama){
+		
+		switch($nama){
+	
+		case 'kategori':
+		$tambah = $this->model('Admin_model')->tambahKategori($_POST);
+		break;
+		
+		case 'tutorial':
+		$tambah = $this->model('Admin_model')->tambahTutorial($_POST);
+		break;
+		
+		case 'post':
+		$tambah = $this->model('Admin_model')->tambahPost($_POST);
+		break;
+		
+		deafult:
+		$tambah = 0;
+		break;
+		};
+		
+		if($tambah > 0){
+		header('location:/?url=admin');
+	    }else{
 			echo 'Kesalahan '.var_dump($_POST);
 		}
 	}
 	
 	public function post($link){
-		$data['artikel'] = $this->model('Admin_model')->getArtikel($link);
-		$data['video'] = $this->model('Admin_model')->getVideo($link);
-		$data['contoh'] = $this->model('Admin_model')->getContoh($link);
+		$data['post'] = $this->model('Admin_model')->getPost($link);
 		$data['title'] = $link;
 		$this->view('template/header');
 		$this->view('admin/post', $data);
