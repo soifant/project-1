@@ -62,6 +62,10 @@ class Database{
 		return $this->stmt->rowCount();
 	}
 
+public function total(){
+		return $this->stmt->fetchColumn();
+	}
+
 
 }
 ?>
