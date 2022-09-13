@@ -25,10 +25,12 @@ class Admin extends Controller{
 		$this->view('template/footer');
 	}
 	
-	public function tambahData($nama){
+	public function tambahData($nama, $id_kategori = 'kategori', $id_tutorial = 'tutorial'){
 		$data['kategori'] = $this->model('Admin_model')->getKategori();
 		$data['tutorial'] = $this->model('Admin_model')->getAllTutorial();
 		$data['page'] = $nama;
+		$data['id_kategori'] = $id_kategori;
+		$data['id_tutorial'] = str_replace('-', ' ', $id_tutorial);
 		$this->view('template/header');
 		$this->view('admin/tambah-post', $data);
 		$this->view('template/footer');
@@ -62,9 +64,10 @@ class Admin extends Controller{
 		}
 	}
 	
-	public function post($link){
-		$data['post'] = $this->model('Admin_model')->getPost($link);
+	public function post($kategori, $link){
+		$data['post'] = $this->model('Admin_model')->getPost($kategori, $link);
 		$data['title'] = $link;
+		$data['kategori'] = $kategori;
 		$this->view('template/header');
 		$this->view('admin/post', $data);
 		$this->view('template/footer');
