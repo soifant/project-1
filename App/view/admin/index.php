@@ -1,17 +1,8 @@
 <div class="container">
 
-
-<div class="dropdown">
-  <center>
-  <a class="text-decoration-none link card bg-light mt-4 p-2" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
- <small>Tambah tutorial</small>
+<a class="text-decoration-none link card bg-light mt-4 p-2" href="?url=admin/tambahData/kategori">
+ <small>Tambah</small>
   </a>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="?url=admin/tambahData/kategori">Kategori</a></li>
-    <li><a class="dropdown-item" href="?url=admin/tambahData/tutorial">Tutorial</a></li>
-    <li><a class="dropdown-item" href="?url=admin/tambahData/post">Post</a></li>
-  </ul></center>
-</div>
 
 <table class="table table-striped mt-3 border">
   <thead>
