@@ -75,16 +75,17 @@ class Admin_model{
 	
 	}
 	
-	public function getPost($nama){
+	public function getPost($nama, $judul){
 	
-		$query = "SELECT * FROM data_post WHERE tutorial=:tutorial";
+		$query = "SELECT * FROM data_post WHERE tutorial=:tutorial and kategori=:kategori";
 		$this->db->query($query);
-		$this->db->bind('tutorial', str_replace('-', ' ', $nama));
+		$this->db->bind('tutorial', str_replace('-', ' ', $judul));
+		$this->db->bind('kategori', $nama);
 		return $this->db->ambilData();
 	}
 	
 	public function getTutorial($nama){
-		$query = "SELECT judul FROM data_tutorial WHERE kategori=:kategori";
+		$query = "SELECT * FROM data_tutorial WHERE kategori=:kategori";
 		$this->db->query($query);
 		$this->db->bind('kategori', $nama);
 		return $this->db->ambilData();
@@ -140,3 +141,4 @@ class Admin_model{
 
 
 }
+?>
